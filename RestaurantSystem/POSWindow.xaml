@@ -1,0 +1,484 @@
+﻿<Window x:Class="RestaurantSystem.POSWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RestaurantSystem"
+        mc:Ignorable="d"
+        
+         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        WindowStartupLocation="CenterScreen"
+       WindowState="Maximized"
+        DataContext="{StaticResource posVM}"
+        Name="poswindow"
+        Title="Restaurant Management" Height="830" Width="1600">
+    <Window.Resources>
+        <Style TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                        <StackPanel Background="LightGray">
+                            <TextBlock x:Name="ContentHeader" FontSize="14" Text="{TemplateBinding Content}" Width="{TemplateBinding Width}" HorizontalAlignment="Center" Margin="10" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="OverridesDefaultStyle" Value="False" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+        <Style x:Key="menu" TargetType="{x:Type ListViewItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="BorderBrush" Value="LightGray"></Setter>
+            <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="LightBlue"></Setter>
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="IsSelected" Value="True"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="alternatingListViewStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="BorderBrush" Value="LightGray"></Setter>
+                    <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+                    <Setter Property="Background" Value="White"></Setter>
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="Height" Value="36"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="BorderBrush" Value="LightGray"></Setter>
+                    <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="Height" Value="36"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="LightBlue"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                    <Setter Property="IsSelected" Value="True"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Button Content="Quay lại"
+                                Command="{Binding HomeCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                HorizontalAlignment="Left"
+                    Background="Black"
+                    BorderThickness="0"
+                                ToolTip="Trở về trang chủ"
+                                FontSize="20" 
+                                Width="130"
+                                Margin="5">
+            </Button>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" BorderThickness="6" BorderBrush="LightGray">
+                <Grid>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="stpnlTable"  Background="White">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Loaded">
+                                    <i:InvokeCommandAction Command="{Binding LoadTableRegionCommand}"
+                                   CommandParameter="{Binding ElementName=stpnlTable}"
+                                   />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+            <Border Grid.Column="1" Background="White" BorderThickness="6" BorderBrush="LightGray">
+                <StackPanel  Margin="10" Orientation="Vertical" Width="570">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="TimeTextBox" 
+                                 Text="{Binding TimeIn,UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="10 0 20 0"
+                                 IsReadOnly="True"
+                             FontSize="20"
+                             Width="230"
+                             materialDesign:HintAssist.Hint="Thời gian bắt đầu"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        <TextBox x:Name="TableTextBox" 
+                                 Foreground="Red"
+                                 Text="{Binding RegionTable, UpdateSourceTrigger=PropertyChanged}"
+                                 IsReadOnly="True"
+                                 Margin="20 0 0 0"
+                             FontSize="20"
+                             Width="200"
+                             materialDesign:HintAssist.Hint="Khu vực - Bàn"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="bindingFood"
+                                 Text="{Binding NameFood, UpdateSourceTrigger=PropertyChanged}"
+                                 IsReadOnly="True"
+                                 Foreground="Blue"
+                                 Margin="10 5"
+                                  Width="250"
+                                  FontSize="20"
+                                 HorizontalAlignment="Left"
+                                 materialDesign:HintAssist.Hint="Sản phẩm"
+                                  materialDesign:HintAssist.HintOpacity=".26"/>
+                        <TextBox x:Name="countFood"
+                                 Text="{Binding CountFood, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="10 5"
+                                 Foreground="Blue"
+                                  Width="70"
+                                  FontSize="20"        
+                                 HorizontalContentAlignment="Center"
+                                 materialDesign:HintAssist.Hint="SL"
+                                  materialDesign:HintAssist.HintOpacity=".26"/>
+                    </StackPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+                        <ListView x:Name="lsvMenu"                               
+                              ItemsSource="{Binding ListBillInfo, UpdateSourceTrigger=PropertyChanged}" 
+                              SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
+                              ItemContainerStyle="{DynamicResource menu}"
+                              Height="370"
+                              Background="White">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Tên" Width="160" DisplayMemberBinding="{Binding Food.Name}"></GridViewColumn>
+                                    <GridViewColumn Header="ĐVT" Width="60" DisplayMemberBinding="{Binding Unit.Name}"></GridViewColumn>
+                                    <GridViewColumn Header="SL" Width="40" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
+                                    <GridViewColumn Header="Đơn giá" Width="75" DisplayMemberBinding="{Binding Food.Price, StringFormat={}{0:#,#}}"></GridViewColumn>
+                                    <GridViewColumn Header="Tổng" Width="90" DisplayMemberBinding="{Binding TotalPrice, StringFormat={}{0:#,#}}"></GridViewColumn>
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Content="+"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Background="Green"
+                                                        BorderThickness="0"
+                                                        Command="{Binding PlusCommand, Source={StaticResource posVM}}"
+                                                        Margin="7 0 0 0"
+                                                        ToolTip="+1 Số lượng">
+                                                    </Button>
+                                                    <Button Content="-"
+                                                        HorizontalAlignment="Center"
+                                                        Background="Orange"
+                                                        BorderThickness="0"
+                                                        VerticalAlignment="Center"
+                                                        Command="{Binding MinusCommand, Source={StaticResource posVM}}"
+                                                        Margin="1 0 0 0"
+                                                        ToolTip="-1 Số lượng">
+                                                    </Button>
+                                                    <Button Content="X"
+                                                        HorizontalAlignment="Center"
+                                                        Background="Red"
+                                                        BorderThickness="0"
+                                                        VerticalAlignment="Center"
+                                                        Command="{Binding DeleteBillInfoCommand, Source={StaticResource posVM}}"
+                                                        Margin="1 0 0 0"
+                                                        ToolTip="Xóa món">
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="39.2"></RowDefinition>
+                            <RowDefinition Height="170.4"/>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Grid Margin="0,0,0.4,50.8" Grid.RowSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Tổng tiền:   " 
+                                               HorizontalAlignment="Right"
+                                           Margin="0 0 10 0"
+                                           VerticalAlignment="Center" 
+                                           Style="{StaticResource MaterialDesignTitleTextBlock}"></TextBlock>
+                                    <TextBox Text="{Binding TotalPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:#,#}}"
+                                             IsReadOnly="True"
+                                        VerticalAlignment="Center"                                               
+                                         TextAlignment="Center"
+                                         Width="80"
+                                         FontSize="16"
+                                         materialDesign:HintAssist.Hint="000.000"
+                                              materialDesign:HintAssist.HintOpacity=".26"
+                                         Foreground="Blue"
+                                         Margin="0 0 10 0"></TextBox>
+                                    <TextBlock Text="VNĐ" 
+                                           VerticalAlignment="Center" 
+                                           Style="{StaticResource MaterialDesignSubheadingTextBlock}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 10">
+                                    <TextBlock Text="Giảm giá:    "                                               
+                                           Margin="0 0 10 0"
+                                           VerticalAlignment="Center" 
+                                           Style="{StaticResource MaterialDesignTitleTextBlock}"></TextBlock>
+                                    <TextBox Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}"
+                                        VerticalAlignment="Center" 
+                                         TextAlignment="Center"
+                                         Width="80"
+                                         FontSize="16"
+                                         materialDesign:HintAssist.Hint="00"
+                                              materialDesign:HintAssist.HintOpacity=".26"
+                                         Foreground="Blue"
+                                         Margin="0 0 10 0">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="TextChanged">
+                                                <i:InvokeCommandAction Command="{Binding DiscountCommand}"
+                                                                       CommandParameter="{Binding ElementName=stpnlTable}"
+                                   />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+                                    <TextBlock Text="%" 
+                                           VerticalAlignment="Center" 
+                                           Style="{StaticResource MaterialDesignSubheadingTextBlock}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 10">
+                                    <TextBlock Text="Thành tiền: " 
+                                           Margin="0 0 10 0"
+                                           VerticalAlignment="Center" 
+                                               FontWeight="Bold"
+                                           Style="{StaticResource MaterialDesignHeadlineTextBlock}"></TextBlock>
+                                    <TextBox Text="{Binding FinalPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:#,#}}"
+                                             IsReadOnly="True"
+                                        VerticalAlignment="Center" 
+                                         TextAlignment="Center"
+                                         Width="80"
+                                         FontSize="20"
+                                         materialDesign:HintAssist.Hint="000.000"
+                                              materialDesign:HintAssist.HintOpacity=".26"
+                                         Foreground="Red"
+                                         Margin="0 0 10 0">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="TextChanged">
+                                                <i:InvokeCommandAction Command="{Binding FinalPriceCommand}"
+                                                                       CommandParameter="{Binding ElementName=stpnlTable}"
+                                   />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+                                    <TextBlock Text="VNĐ" 
+                                           VerticalAlignment="Center" 
+                                           Style="{StaticResource MaterialDesignSubheadingTextBlock}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 10">
+                                    <TextBlock Text="Khách đưa: "                                               
+                                           Margin="0 0 10 0"
+                                           VerticalAlignment="Center" 
+                                           Style="{StaticResource MaterialDesignTitleTextBlock}"></TextBlock>
+                                    <TextBox Text="{Binding PayPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:#,#}}"
+                                        VerticalAlignment="Center" 
+                                         TextAlignment="Center"
+                                         Width="80"
+                                         FontSize="16"
+                                         materialDesign:HintAssist.Hint="00"
+                                              materialDesign:HintAssist.HintOpacity=".26"
+                                         Foreground="Blue"
+                                         Margin="0 0 10 0">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="TextChanged">
+                                                <i:InvokeCommandAction Command="{Binding CustomerPayCommand}"
+                                                                       CommandParameter="{Binding ElementName=stpnlTable}"
+                                   />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+                                    <TextBlock Text="VNĐ" 
+                                           VerticalAlignment="Center" 
+                                           Style="{StaticResource MaterialDesignSubheadingTextBlock}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Trả lại:         "                                               
+                                           Margin="0 0 10 0"
+                                           VerticalAlignment="Center" 
+                                           Style="{StaticResource MaterialDesignTitleTextBlock}"></TextBlock>
+                                    <TextBox Text="{Binding BackPrice, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:#,#}}"
+                                             IsReadOnly="True"
+                                        VerticalAlignment="Center" 
+                                         TextAlignment="Center"
+                                         Width="79"
+                                         FontSize="16"
+                                         materialDesign:HintAssist.Hint="00"
+                                              materialDesign:HintAssist.HintOpacity=".26"
+                                         Foreground="Blue"
+                                         Margin="0 0 10 5"></TextBox>
+                                    <TextBlock Text="VNĐ" 
+                                           VerticalAlignment="Center" 
+                                           Style="{StaticResource MaterialDesignSubheadingTextBlock}"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="10">
+                                <StackPanel>
+
+                                    <TextBox   
+                                      
+                                        Margin="2"  
+                                        VerticalAlignment="Top"   
+                                        Width="260"
+                                        Height="140"   
+                                        AcceptsReturn="True"   
+                                        TextWrapping="Wrap"   
+                                        VerticalScrollBarVisibility="Auto"   
+                                        materialDesign:HintAssist.Hint="Thông tin thêm cho hóa đơn"/>
+                                </StackPanel>
+                                <Button Content="Thanh toán"
+                                        Command="{Binding CheckoutCommand}"
+                                        CommandParameter="{Binding ElementName=stpnlTable}"
+                                        FontSize="20"
+                                        Background="Red"
+                                        BorderThickness="0"
+                                        Width="150" 
+                                        Margin="5"></Button>
+
+                            </StackPanel>
+                        </Grid>
+
+                        <StackPanel Grid.Row="2" Margin="10" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button Margin="5" 
+                                        Command="{Binding SwitchTableCommand}"
+                                         CommandParameter="{Binding ElementName=stpnlTable}"
+                                        Content="Chuyển bàn" 
+                                        FontSize="20" Width="150" 
+                                        HorizontalAlignment="Left"></Button>
+                            <Button Content="Hủy HĐ"
+                                        FontSize="20"
+                                        Command="{Binding DeleteBillCommand}"
+                                        CommandParameter="{Binding ElementName=stpnlTable}"
+                                        Width="150"
+                                        Margin="5"></Button>
+
+
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="2" Background="White" BorderThickness="6" BorderBrush="LightGray">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0"    
+                                Margin="10" 
+                                Orientation="Horizontal">
+                        <TextBlock Text="Danh mục:" Margin="0 0 10 0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignTitleTextBlock}"></TextBlock>
+                        <ComboBox x:Name="cmbCategory" materialDesign:HintAssist.Hint="Danh mục thức ăn" 
+                                  ItemsSource="{Binding ListCategoryFood}"
+                                  DisplayMemberPath="Name"
+                                  SelectedItem="{Binding SelectedCategoryFood,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                  Width="300"
+                                  FontSize="20"
+                                  IsEditable="True"
+                                  materialDesign:HintAssist.HintOpacity=".26">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding LoadListFoodCommand}"
+                                   CommandParameter="{Binding ElementName=cmbCategory}"
+                                   />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1"    
+                                Margin="10 10 10 0"
+                                Orientation="Horizontal">
+                        <TextBlock Text="Tìm kiếm:" Margin="0 0 18 0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignTitleTextBlock}"></TextBlock>
+                        <TextBox x:Name="SearchTextBox"                                 
+                                 Text="{Binding SearchFood, UpdateSourceTrigger=PropertyChanged}"
+                                  Width="300"
+                                  FontSize="20"
+                                 materialDesign:HintAssist.Hint="Tìm kiếm sản phẩm"
+                                  materialDesign:HintAssist.HintOpacity=".26">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding SearchFoodCommand}"
+                                   CommandParameter="{Binding ElementName=SearchTextBox}"
+                                   />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+                            <ListView x:Name="listFood"                                   
+                                  ItemsSource="{Binding ListFood}"                                  
+                                  ItemContainerStyle="{DynamicResource alternatingListViewStyle}"
+                                  SelectedItem="{Binding SelectedFood,Mode=OneWayToSource}"
+                                  AlternationCount="2"
+                                  Margin="0 8">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Content="+"    
+                                                        Command="{Binding AddFoodCommand, Source={StaticResource posVM}}" 
+                                                        CommandParameter="{Binding  ElementName=stpnlTable}"
+                                                        FontWeight="Bold"
+                                                        Background="Green"
+                                                        BorderThickness="0"
+                                                        HorizontalAlignment="Stretch"
+                                                        VerticalAlignment="Stretch">
+                                                    </Button>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Tên" Width="200" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                                        <GridViewColumn Header="ĐVT" Width="100" DisplayMemberBinding="{Binding Unit.Name}"></GridViewColumn>
+                                        <GridViewColumn Header="Đơn giá" Width="110" DisplayMemberBinding="{Binding Price, StringFormat={}{0:#,#}}"></GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

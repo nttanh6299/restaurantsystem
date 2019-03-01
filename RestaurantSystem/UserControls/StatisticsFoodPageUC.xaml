@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="RestaurantSystem.UserControls.StatisticsFoodPageUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RestaurantSystem.UserControls"
+             mc:Ignorable="d" 
+               xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+
+            DataContext="{StaticResource statisticsfoodUCVM}"
+             d:DesignHeight="760" d:DesignWidth="1280">
+    <UserControl.Resources>
+        <Style x:Key="groupbox" TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontSize="18" FontWeight="Bold"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                        <StackPanel Background="LightGray">
+                            <TextBlock x:Name="ContentHeader" FontSize="14" Text="{TemplateBinding Content}" Width="{TemplateBinding Width}" HorizontalAlignment="Center" Margin="10" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="OverridesDefaultStyle" Value="False" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+        <Style x:Key="alternatingListViewStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="BorderBrush" Value="LightGray"></Setter>
+                    <Setter Property="BorderThickness" Value="1 0 1 1"></Setter>
+                    <Setter Property="Background" Value="White"></Setter>
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="Height" Value="36"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="BorderBrush" Value="LightGray"></Setter>
+                    <Setter Property="BorderThickness" Value="1 0 1 1"></Setter>
+                    <Setter Property="Background" Value="AliceBlue"></Setter>
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="Height" Value="36"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="LightBlue"></Setter>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="true">
+                    <Setter Property="Background" Value="LightBlue"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="White">
+        <GroupBox Header="THỐNG KÊ MÓN ĂN" FontSize="25" Margin="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <GroupBox Margin="0 10 0 0" Header="Điều kiện thống kê" Style="{StaticResource groupbox}">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="15" VerticalAlignment="Center" Margin="0 0 9 0">Từ ngày:</TextBlock>
+                                <DatePicker SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}"
+                                            VerticalAlignment="Center"
+                                            FontSize="15"
+                                            Width="120"
+                                            />                              
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="0 10 0 0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="15" VerticalAlignment="Center">Đến ngày:</TextBlock>
+                                    <DatePicker SelectedDate="{Binding ToDate, UpdateSourceTrigger=PropertyChanged}"
+                                            VerticalAlignment="Center"
+                                            FontSize="15"
+                                            Width="120"
+                                            />
+                                    <StackPanel Orientation="Horizontal" Width="400">
+                                                                           </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Thao tác"
+                              Width="640" 
+                              Margin="10 10 0 0" Style="{StaticResource groupbox}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button FontSize="16"
+                                        Command="{Binding LoadListCommand}"
+                                        Width="130"
+                                        Background="Black"
+                                        BorderThickness="0">Áp dụng</Button>
+                                <Button FontSize="16" Margin="10 0"
+                                        Command="{Binding ExcelCommand}"
+                                        Width="130"
+                                        Background="Green"
+                                        BorderThickness="0">Xuất Excel</Button>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                </StackPanel>
+
+                <Grid Grid.Row="1" Margin="0 10 0 0">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+                        <ListView ItemsSource="{Binding List}"                   
+                  SelectedItem="{Binding SelectedItem,Mode=TwoWay}"                                      
+                  Margin="0 10"                                       
+                  Height="330"            
+                  VerticalAlignment="Top"
+                  ItemContainerStyle="{DynamicResource alternatingListViewStyle}"                                     
+                  AlternationCount="2">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã món" Width="150" DisplayMemberBinding="{Binding Item.Id}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên món" Width="300" DisplayMemberBinding="{Binding Item.Name}"></GridViewColumn>
+                                    <GridViewColumn Header="ĐVT" Width="150" DisplayMemberBinding="{Binding Item.Unit.Name}"></GridViewColumn>
+                                    <GridViewColumn Header="Đơn giá" Width="240" DisplayMemberBinding="{Binding Item.Price, StringFormat={}{0:#,#}}"></GridViewColumn>
+                                    <GridViewColumn Header="Số lượng tổng" Width="210" >
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Count}" Foreground="Red"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="210" DisplayMemberBinding="{Binding a}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

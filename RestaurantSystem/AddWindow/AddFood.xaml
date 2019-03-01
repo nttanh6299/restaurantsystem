@@ -1,0 +1,90 @@
+﻿<Window x:Class="RestaurantSystem.AddWindow.AddFood"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RestaurantSystem.AddWindow"
+        mc:Ignorable="d"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Name="window"
+        Title="AddSupplier" Height="250" Width="800"
+        FocusManager.FocusedElement="{Binding ElementName=namefood}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCommand}"
+                                   CommandParameter="{Binding ElementName=window}"
+                                   />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <GroupBox Header="SẢN PHẨM" FontSize="25">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding MouseMoveWindowCommand}"
+                                   CommandParameter="{Binding ElementName=window}"
+                                   />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Grid Margin="10 10 10 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBox Name="namefood" Margin="25 1"
+                                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                      FontSize="17"
+                                materialDesign:HintAssist.Hint="Tên sản phẩm"  
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        <TextBox Margin="25 1"
+                                     Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"
+                                      FontSize="17"
+                                materialDesign:HintAssist.Hint="Đơn giá"  
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />                      
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <ComboBox ItemsSource="{Binding CategoryFood}" materialDesign:HintAssist.Hint="Danh mục" 
+                                      DisplayMemberPath="Name"
+                                      SelectedItem="{Binding SelectedCategoryFood, UpdateSourceTrigger=PropertyChanged}"
+                                      Margin="25 7"
+                                     FontSize="17"></ComboBox>
+                        <ComboBox ItemsSource="{Binding Unit}" materialDesign:HintAssist.Hint="Đơn vị tính" 
+                                      DisplayMemberPath="Name"
+                                      SelectedItem="{Binding SelectedUnit, UpdateSourceTrigger=PropertyChanged}"
+                                      Margin="25 7"
+                                     FontSize="17"></ComboBox>
+                    </StackPanel>
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Width="100" 
+                            IsDefault="True"
+                            Command="{Binding OKCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">Xác nhận</Button>
+                    <Button Width="100" Margin="20 0"
+                            IsCancel="True"
+                            Command="{Binding ExitCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">Hủy</Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
+

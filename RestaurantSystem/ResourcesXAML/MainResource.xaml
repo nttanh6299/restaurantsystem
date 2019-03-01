@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:RestaurantSystem.ResourcesXAML"
+                    xmlns:viewmodel="clr-namespace:RestaurantSystem.ViewModel">
+    <viewmodel:LoginViewModel x:Key="loginVM"></viewmodel:LoginViewModel>
+    <viewmodel:ManageViewModel x:Key="manageVM"></viewmodel:ManageViewModel>
+    <viewmodel:POSViewModel x:Key="posVM"></viewmodel:POSViewModel>
+    <viewmodel:SwitchTableViewModel x:Key="switchtableVM"></viewmodel:SwitchTableViewModel>
+    <viewmodel:HomeUCViewModel x:Key="homeUCVM"></viewmodel:HomeUCViewModel>
+    <viewmodel:SupplierPageViewModel x:Key="supplierUCVM"></viewmodel:SupplierPageViewModel>
+    <viewmodel:CategoryPageViewModel x:Key="categoryUCVM"></viewmodel:CategoryPageViewModel>
+    <viewmodel:TablePageViewModel x:Key="tableUCVM"></viewmodel:TablePageViewModel>
+    <viewmodel:StaffPageViewModel x:Key="staffUCVM"></viewmodel:StaffPageViewModel>
+    <viewmodel:InventoryInfoPageViewModel x:Key="inventoryinfoUCVM"></viewmodel:InventoryInfoPageViewModel>
+    <viewmodel:FoodPageViewModel x:Key="foodUCVM"></viewmodel:FoodPageViewModel>
+    <viewmodel:GoodsForFoodPageViewModel x:Key="goodsforfoodUCVM"></viewmodel:GoodsForFoodPageViewModel>
+    <viewmodel:InputPageViewModel x:Key="inputUCVM"></viewmodel:InputPageViewModel>
+    <viewmodel:OutputPageViewModel x:Key="outputUCVM"></viewmodel:OutputPageViewModel>
+    <viewmodel:StatisticsPageViewModel x:Key="statisticsUCVM"></viewmodel:StatisticsPageViewModel>
+    <viewmodel:RevenuePageViewModel x:Key="revenueUCVM"></viewmodel:RevenuePageViewModel>
+    <viewmodel:StatisticsFoodViewModel x:Key="statisticsfoodUCVM"></viewmodel:StatisticsFoodViewModel>
+    <viewmodel:ChangePasswordViewModel x:Key="changepassVM"></viewmodel:ChangePasswordViewModel>
+</ResourceDictionary>

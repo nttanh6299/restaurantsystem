@@ -1,0 +1,244 @@
+﻿<UserControl x:Class="RestaurantSystem.UserControls.SupplierPageUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RestaurantSystem.UserControls"
+             mc:Ignorable="d" 
+             
+                 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+
+            DataContext="{StaticResource supplierUCVM}"
+             d:DesignHeight="760" d:DesignWidth="1280">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                        <StackPanel Background="LightGray">
+                            <TextBlock x:Name="ContentHeader" FontSize="14" Text="{TemplateBinding Content}" Width="{TemplateBinding Width}" HorizontalAlignment="Center" Margin="10" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="OverridesDefaultStyle" Value="False" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+        <Style x:Key="groupbox" TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="Margin" Value="25,20,5,5"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontWeight="Bold"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>            
+        </Style>
+        <Style x:Key="alternatingListViewStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="BorderBrush" Value="LightGray"></Setter>
+                    <Setter Property="BorderThickness" Value="1 0 1 1"></Setter>
+                    <Setter Property="Background" Value="White"></Setter>
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="Height" Value="36"></Setter>                   
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="BorderBrush" Value="LightGray"></Setter>
+                    <Setter Property="BorderThickness" Value="1 0 1 1"></Setter>
+                    <Setter Property="Background" Value="AliceBlue"></Setter>
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="Height" Value="36"></Setter>                    
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="LightBlue"></Setter>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="true">
+                    <Setter Property="Background" Value="CornflowerBlue"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="White">        
+        <GroupBox Header="NHÀ CUNG CẤP" FontSize="25" Margin="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" 
+                          Header="Thông tin NCC"
+                          Style="{StaticResource groupbox}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" Margin="10">
+                            <TextBox Margin="25 1"
+                                     Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
+                                     IsReadOnly="True"
+                                    FontSize="17"
+                                materialDesign:HintAssist.Hint="ID" 
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox Margin="25 1"
+                                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                    FontSize="17"
+                                materialDesign:HintAssist.Hint="Tên nhà cung cấp" 
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox Margin="25 1"
+                                     Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"
+                                      FontSize="17"
+                                materialDesign:HintAssist.Hint="Địa chỉ nhà cung cấp"  
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />                          
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10">
+                            <TextBox Margin="25 1"
+                                     Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
+                                      FontSize="17"
+                                materialDesign:HintAssist.Hint="Số điện thoại"  
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox Margin="25 1"
+                                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                                     FontSize="17"
+                                materialDesign:HintAssist.Hint="Email" 
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                                 
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="10">
+                            <DatePicker SelectedDate="{Binding ContractDate, UpdateSourceTrigger=PropertyChanged}"
+                            Width="200"
+                            Margin="25 13 0 0"
+                            HorizontalAlignment="Left"
+                            FontSize="17"
+                            materialDesign:HintAssist.Hint="Ngày hợp tác" 
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <TextBox Margin="25 1"
+                                     Text="{Binding MoreInfo, UpdateSourceTrigger=PropertyChanged}"
+                                      FontSize="17"
+                                materialDesign:HintAssist.Hint="Thông tin thêm"  
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="Danh sách NCC" Margin="25,10,5,5" Style="{StaticResource groupbox}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock FontSize="15" VerticalAlignment="Center" Margin="25 0 10 0">Sắp xếp theo:</TextBlock>
+                                <ComboBox ItemsSource="{Binding ListOrder}"
+                                          SelectedIndex="0"
+                                          FontSize="15"
+                                          Width="120">
+                                </ComboBox>
+                            </StackPanel>
+                            <ComboBox ItemsSource="{Binding ListOrderKind}"  
+                                      x:Name="cmbOrder"
+                                      SelectedIndex="{Binding Index, UpdateSourceTrigger=PropertyChanged}"
+                                      Margin="10 0 0 0" 
+                                      FontSize="15" 
+                                      Width="120">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding OrderCommand}"
+                                   CommandParameter="{Binding ElementName= cmbOrder}"
+                                   />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                            
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Width="80"
+                                        ToolTip="Thêm nhà cung cấp"
+                                        BorderThickness="0"
+                                        Background="Green"
+                                        Command="{Binding AddCommand}">Thêm</Button>
+                                <Button Width="80"
+                                        ToolTip="Sửa nhà cung cấp"
+                                        BorderThickness="0"
+                                        Background="Orange"
+                                        Command="{Binding EditCommand}"
+                                        Margin="10 0 0 0">Sửa</Button>
+                                <Button Width="80" 
+                                        ToolTip="Xóa nhà cung cấp"
+                                        BorderThickness="0"
+                                        Background="Red"
+                                        Command="{Binding DeleteCommand}" Margin="10 0">Xóa</Button>                               
+                            </StackPanel>
+                        </Grid>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ListView     ItemsSource="{Binding List}" 
+                                          SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
+                                          Margin="0 10"   
+                                          Height="330"
+                                          ItemContainerStyle="{DynamicResource alternatingListViewStyle}"
+                                          AlternationCount="2">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID" Width="80">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Id}" Foreground="Red"></TextBlock>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Tên NCC" Width="200" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                                        <GridViewColumn Header="Địa chỉ" Width="250" DisplayMemberBinding="{Binding Address}"></GridViewColumn>
+                                        <GridViewColumn Header="Số ĐT" Width="120" DisplayMemberBinding="{Binding Phone}"></GridViewColumn>
+                                        <GridViewColumn Header="Email" Width="160" DisplayMemberBinding="{Binding Email}"></GridViewColumn>
+                                        <GridViewColumn Header="Ngày hợp tác" Width="120" DisplayMemberBinding="{Binding ContractDate, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                        <GridViewColumn Header="Thông tin thêm" Width="260" DisplayMemberBinding="{Binding MoreInfo}"></GridViewColumn>                                        
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </ScrollViewer>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock VerticalAlignment="Center"
+                                           Margin="25 0 0 0"                                         
+                                           FontSize="15">Tổng số NCC:</TextBlock>
+                                <TextBlock Text="{Binding CountOfSupplier, UpdateSourceTrigger=PropertyChanged}"
+                                           FontSize="16" 
+                                           VerticalAlignment="Center"
+                                           Foreground="Red"
+                                           Margin="5 0"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBox materialDesign:HintAssist.Hint="Tìm kiếm"
+                                         Text="{Binding SearchTextbox, UpdateSourceTrigger=PropertyChanged}"
+                                         Width="200"
+                                         FontSize="14"
+                                         Margin="10">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding SearchCommand}"
+                                   CommandParameter="{Binding ElementName=CommentTextBox}"
+                                   />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>          
+    </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

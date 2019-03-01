@@ -1,0 +1,20 @@
+﻿RestaurantSystem
+
+
+winexe
+C#
+.cs
+C:\Users\korim\Desktop\sb admin v2\RestaurantSystem\RestaurantSystem\obj\Debug\
+RestaurantSystem
+none
+false
+DEBUG;TRACE
+C:\Users\korim\Desktop\sb admin v2\RestaurantSystem\RestaurantSystem\App.xaml
+37-1850266605
+3-1115742961
+102-428745089
+361049536759
+AddWindow\AddFood.xaml;AddWindow\AddGoods.xaml;AddWindow\AddRegion.xaml;AddWindow\AddStaff.xaml;AddWindow\AddSupplier.xaml;AddWindow\AddTable.xaml;AddWindow\AddUnit.xaml;AddWindow\AECategoryWindow.xaml;AddWindow\EditBill.xaml;ChangePasswordWindow.xaml;LoginWindow.xaml;ManageWindow.xaml;POSWindow.xaml;ReportView\rpBillWindow.xaml;ReportView\rpInputWindow.xaml;ReportView\rpOutputWindow.xaml;ResourcesXAML\MainResource.xaml;SwitchTableWindow.xaml;UserControls\CalculatingGoodsForFoodPageUC.xaml;UserControls\CategoryPageUC.xaml;UserControls\FoodPageUC.xaml;UserControls\HomeUC.xaml;UserControls\InputDetail.xaml;UserControls\InputNormal.xaml;UserControls\InputPageUC.xaml;UserControls\InventoryInfoUC.xaml;UserControls\OutputDetail.xaml;UserControls\OutputNormal.xaml;UserControls\OutputPageUC.xaml;UserControls\RevenueDetail.xaml;UserControls\RevenueNormal.xaml;UserControls\RevenuePageUC.xaml;UserControls\StaffPageUC.xaml;UserControls\StatisticsFoodPageUC.xaml;UserControls\StatisticsPageUC.xaml;UserControls\SupplierPageUC.xaml;UserControls\TablePageUC.xaml;
+
+False
+

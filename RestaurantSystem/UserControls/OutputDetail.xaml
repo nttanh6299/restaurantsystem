@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="RestaurantSystem.UserControls.OutputDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RestaurantSystem.UserControls"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+              Name="detail">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCommand}"
+                                   CommandParameter="{Binding ElementName=detail}"
+                                   />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <Style TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                        <StackPanel Background="LightGray">
+                            <TextBlock x:Name="ContentHeader" FontSize="14" Text="{TemplateBinding Content}" Width="{TemplateBinding Width}" HorizontalAlignment="Center" Margin="10" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="OverridesDefaultStyle" Value="False" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+        <Style x:Key="alternatingListViewStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="BorderBrush" Value="LightGray"></Setter>
+                    <Setter Property="BorderThickness" Value="1 0 1 1"></Setter>
+                    <Setter Property="Background" Value="White"></Setter>
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="Height" Value="36"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="BorderBrush" Value="LightGray"></Setter>
+                    <Setter Property="BorderThickness" Value="1 0 1 1"></Setter>
+                    <Setter Property="Background" Value="AliceBlue"></Setter>
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="Height" Value="36"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="LightBlue"></Setter>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="true">
+                    <Setter Property="Background" Value="LightBlue"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+            <ListView ItemsSource="{Binding List}"                   
+                  SelectedItem="{Binding SelectedItem,Mode=TwoWay}"                                      
+                  Margin="0 10"                                       
+                  Height="330"            
+                  VerticalAlignment="Top"
+                  ItemContainerStyle="{DynamicResource alternatingListViewStyle}"                                     
+                  AlternationCount="2">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Mã phiếu" Width="130" DisplayMemberBinding="{Binding Output.Id}"></GridViewColumn>
+                        <GridViewColumn Header="Ngày" Width="120" DisplayMemberBinding="{Binding Output.DateOutput, StringFormat='dd/MM/yyyy'}"></GridViewColumn>                        
+                        <GridViewColumn Header="Mã hàng hóa"  DisplayMemberBinding="{Binding Goods.Id}"></GridViewColumn>
+                        <GridViewColumn Header="Tên hàng hóa" Width="180" DisplayMemberBinding="{Binding Goods.Name}"></GridViewColumn>
+                        <GridViewColumn Header="ĐVT"  DisplayMemberBinding="{Binding Goods.Unit.Name}"></GridViewColumn>
+                        <GridViewColumn Header="Số lượng xuất" Width="160"  DisplayMemberBinding="{Binding Count, StringFormat={}{0:#,#}}"></GridViewColumn>                       
+                        <GridViewColumn Header="NV lập" Width="150"  DisplayMemberBinding="{Binding Output.Staff.Name}"></GridViewColumn>
+                        <GridViewColumn Header="Ghi chú" Width="400"  DisplayMemberBinding="{Binding Output.MoreInfo}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

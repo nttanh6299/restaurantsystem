@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RestaurantSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bill">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeIn" Type="datetime" />
+    <Property Name="TimeOut" Type="datetime" />
+    <Property Name="TotalPrice" Type="float" />
+    <Property Name="MoreInfo" Type="nvarchar(max)" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Discount" Type="int" />
+    <Property Name="IdTable" Type="int" />
+    <Property Name="IdStaff" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="BillInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdBill" Type="int" />
+    <Property Name="IdFood" Type="int" />
+    <Property Name="Count" Type="int" />
+  </EntityType>
+  <EntityType Name="CategoryFood">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Food">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Price" Type="float" />
+    <Property Name="IdCategoryFood" Type="int" />
+    <Property Name="IdUnit" Type="int" />
+  </EntityType>
+  <EntityType Name="Goods">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Status" Type="int" />
+    <Property Name="IdUnit" Type="int" />
+  </EntityType>
+  <EntityType Name="GoodsForFood">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdFood" Type="int" />
+    <Property Name="IdGoods" Type="int" />
+    <Property Name="Count" Type="float" />
+  </EntityType>
+  <EntityType Name="Input">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DateInput" Type="datetime" />
+    <Property Name="MoreInfo" Type="nvarchar(max)" />
+    <Property Name="IdStaff" Type="nvarchar" MaxLength="128" />
+    <Property Name="IdSupplier" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="InputInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdInput" Type="nvarchar" MaxLength="128" />
+    <Property Name="IdGoods" Type="int" />
+    <Property Name="Count" Type="float" />
+    <Property Name="InputPrice" Type="float" />
+  </EntityType>
+  <EntityType Name="Output">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DateOutput" Type="datetime" />
+    <Property Name="MoreInfo" Type="nvarchar(max)" />
+    <Property Name="IdStaff" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="OutputInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdOutput" Type="nvarchar" MaxLength="128" />
+    <Property Name="IdGoods" Type="int" />
+    <Property Name="Count" Type="float" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="IdRole" Type="int" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" />
+    <Property Name="MoreInfo" Type="nvarchar(max)" />
+    <Property Name="ContractDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TableFood">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="IdRegion" Type="int" />
+    <Property Name="Status" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK__Bill__IdStaff__1FCDBCEB">
+    <End Role="TableFood" Type="Self.TableFood" Multiplicity="0..1" />
+    <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TableFood">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="IdTable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Bill__IdStaff__20C1E124">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BillInfo__Count__25869641">
+    <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
+    <End Role="BillInfo" Type="Self.BillInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bill">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillInfo">
+        <PropertyRef Name="IdBill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BillInfo__IdFood__267ABA7A">
+    <End Role="Food" Type="Self.Food" Multiplicity="0..1" />
+    <End Role="BillInfo" Type="Self.BillInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Food">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillInfo">
+        <PropertyRef Name="IdFood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Food__IdUnit__1A14E395">
+    <End Role="CategoryFood" Type="Self.CategoryFood" Multiplicity="0..1" />
+    <End Role="Food" Type="Self.Food" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryFood">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Food">
+        <PropertyRef Name="IdCategoryFood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Food__IdUnit__1B0907CE">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+    <End Role="Food" Type="Self.Food" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Food">
+        <PropertyRef Name="IdUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Goods__IdUnit__2F10007B">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+    <End Role="Goods" Type="Self.Goods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Goods">
+        <PropertyRef Name="IdUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GoodsForF__Count__33D4B598">
+    <End Role="Food" Type="Self.Food" Multiplicity="0..1" />
+    <End Role="GoodsForFood" Type="Self.GoodsForFood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Food">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GoodsForFood">
+        <PropertyRef Name="IdFood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GoodsForF__IdGoo__34C8D9D1">
+    <End Role="Goods" Type="Self.Goods" Multiplicity="0..1" />
+    <End Role="GoodsForFood" Type="Self.GoodsForFood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GoodsForFood">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Input__IdSupplie__398D8EEE">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Input" Type="Self.Input" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Input">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Input__IdSupplie__3A81B327">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="Input" Type="Self.Input" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Input">
+        <PropertyRef Name="IdSupplier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InputInfo__IdGoo__403A8C7D">
+    <End Role="Goods" Type="Self.Goods" Multiplicity="0..1" />
+    <End Role="InputInfo" Type="Self.InputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InputInfo">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InputInfo__Input__3F466844">
+    <End Role="Input" Type="Self.Input" Multiplicity="0..1" />
+    <End Role="InputInfo" Type="Self.InputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Input">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InputInfo">
+        <PropertyRef Name="IdInput" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Output__IdStaff__44FF419A">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Output" Type="Self.Output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Output">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutputInf__Count__49C3F6B7">
+    <End Role="Output" Type="Self.Output" Multiplicity="0..1" />
+    <End Role="OutputInfo" Type="Self.OutputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Output">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OutputInfo">
+        <PropertyRef Name="IdOutput" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutputInf__IdGoo__4AB81AF0">
+    <End Role="Goods" Type="Self.Goods" Multiplicity="0..1" />
+    <End Role="OutputInfo" Type="Self.OutputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OutputInfo">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__IdRole__0519C6AF">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TableFood__IdReg__0DAF0CB0">
+    <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+    <End Role="TableFood" Type="Self.TableFood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TableFood">
+        <PropertyRef Name="IdRegion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RestaurantSystemModelStoreContainer">
+    <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BillInfo" EntityType="Self.BillInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CategoryFood" EntityType="Self.CategoryFood" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Food" EntityType="Self.Food" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Goods" EntityType="Self.Goods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GoodsForFood" EntityType="Self.GoodsForFood" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Input" EntityType="Self.Input" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InputInfo" EntityType="Self.InputInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Output" EntityType="Self.Output" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OutputInfo" EntityType="Self.OutputInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TableFood" EntityType="Self.TableFood" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Bill__IdStaff__1FCDBCEB" Association="Self.FK__Bill__IdStaff__1FCDBCEB">
+      <End Role="TableFood" EntitySet="TableFood" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Bill__IdStaff__20C1E124" Association="Self.FK__Bill__IdStaff__20C1E124">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BillInfo__Count__25869641" Association="Self.FK__BillInfo__Count__25869641">
+      <End Role="Bill" EntitySet="Bill" />
+      <End Role="BillInfo" EntitySet="BillInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BillInfo__IdFood__267ABA7A" Association="Self.FK__BillInfo__IdFood__267ABA7A">
+      <End Role="Food" EntitySet="Food" />
+      <End Role="BillInfo" EntitySet="BillInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Food__IdUnit__1A14E395" Association="Self.FK__Food__IdUnit__1A14E395">
+      <End Role="CategoryFood" EntitySet="CategoryFood" />
+      <End Role="Food" EntitySet="Food" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Food__IdUnit__1B0907CE" Association="Self.FK__Food__IdUnit__1B0907CE">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Food" EntitySet="Food" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Goods__IdUnit__2F10007B" Association="Self.FK__Goods__IdUnit__2F10007B">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Goods" EntitySet="Goods" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GoodsForF__Count__33D4B598" Association="Self.FK__GoodsForF__Count__33D4B598">
+      <End Role="Food" EntitySet="Food" />
+      <End Role="GoodsForFood" EntitySet="GoodsForFood" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GoodsForF__IdGoo__34C8D9D1" Association="Self.FK__GoodsForF__IdGoo__34C8D9D1">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="GoodsForFood" EntitySet="GoodsForFood" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Input__IdSupplie__398D8EEE" Association="Self.FK__Input__IdSupplie__398D8EEE">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Input" EntitySet="Input" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Input__IdSupplie__3A81B327" Association="Self.FK__Input__IdSupplie__3A81B327">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="Input" EntitySet="Input" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InputInfo__IdGoo__403A8C7D" Association="Self.FK__InputInfo__IdGoo__403A8C7D">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="InputInfo" EntitySet="InputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InputInfo__Input__3F466844" Association="Self.FK__InputInfo__Input__3F466844">
+      <End Role="Input" EntitySet="Input" />
+      <End Role="InputInfo" EntitySet="InputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Output__IdStaff__44FF419A" Association="Self.FK__Output__IdStaff__44FF419A">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Output" EntitySet="Output" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutputInf__Count__49C3F6B7" Association="Self.FK__OutputInf__Count__49C3F6B7">
+      <End Role="Output" EntitySet="Output" />
+      <End Role="OutputInfo" EntitySet="OutputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutputInf__IdGoo__4AB81AF0" Association="Self.FK__OutputInf__IdGoo__4AB81AF0">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="OutputInfo" EntitySet="OutputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__IdRole__0519C6AF" Association="Self.FK__Staff__IdRole__0519C6AF">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TableFood__IdReg__0DAF0CB0" Association="Self.FK__TableFood__IdReg__0DAF0CB0">
+      <End Role="Region" EntitySet="Region" />
+      <End Role="TableFood" EntitySet="TableFood" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

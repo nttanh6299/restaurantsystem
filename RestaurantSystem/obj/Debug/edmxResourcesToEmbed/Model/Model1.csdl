@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RestaurantSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="RestaurantSystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bill" EntityType="RestaurantSystemModel.Bill" />
+    <EntitySet Name="BillInfo" EntityType="RestaurantSystemModel.BillInfo" />
+    <EntitySet Name="CategoryFood" EntityType="RestaurantSystemModel.CategoryFood" />
+    <EntitySet Name="Food" EntityType="RestaurantSystemModel.Food" />
+    <EntitySet Name="Goods" EntityType="RestaurantSystemModel.Goods" />
+    <EntitySet Name="GoodsForFood" EntityType="RestaurantSystemModel.GoodsForFood" />
+    <EntitySet Name="Input" EntityType="RestaurantSystemModel.Input" />
+    <EntitySet Name="InputInfo" EntityType="RestaurantSystemModel.InputInfo" />
+    <EntitySet Name="Output" EntityType="RestaurantSystemModel.Output" />
+    <EntitySet Name="OutputInfo" EntityType="RestaurantSystemModel.OutputInfo" />
+    <EntitySet Name="Region" EntityType="RestaurantSystemModel.Region" />
+    <EntitySet Name="Role" EntityType="RestaurantSystemModel.Role" />
+    <EntitySet Name="Staff" EntityType="RestaurantSystemModel.Staff" />
+    <EntitySet Name="Supplier" EntityType="RestaurantSystemModel.Supplier" />
+    <EntitySet Name="TableFood" EntityType="RestaurantSystemModel.TableFood" />
+    <EntitySet Name="Unit" EntityType="RestaurantSystemModel.Unit" />
+    <AssociationSet Name="FK__Bill__IdStaff__1FCDBCEB" Association="RestaurantSystemModel.FK__Bill__IdStaff__1FCDBCEB">
+      <End Role="TableFood" EntitySet="TableFood" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Bill__IdStaff__20C1E124" Association="RestaurantSystemModel.FK__Bill__IdStaff__20C1E124">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BillInfo__Count__25869641" Association="RestaurantSystemModel.FK__BillInfo__Count__25869641">
+      <End Role="Bill" EntitySet="Bill" />
+      <End Role="BillInfo" EntitySet="BillInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BillInfo__IdFood__267ABA7A" Association="RestaurantSystemModel.FK__BillInfo__IdFood__267ABA7A">
+      <End Role="Food" EntitySet="Food" />
+      <End Role="BillInfo" EntitySet="BillInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Food__IdUnit__1A14E395" Association="RestaurantSystemModel.FK__Food__IdUnit__1A14E395">
+      <End Role="CategoryFood" EntitySet="CategoryFood" />
+      <End Role="Food" EntitySet="Food" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Food__IdUnit__1B0907CE" Association="RestaurantSystemModel.FK__Food__IdUnit__1B0907CE">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Food" EntitySet="Food" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GoodsForF__Count__33D4B598" Association="RestaurantSystemModel.FK__GoodsForF__Count__33D4B598">
+      <End Role="Food" EntitySet="Food" />
+      <End Role="GoodsForFood" EntitySet="GoodsForFood" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Goods__IdUnit__2F10007B" Association="RestaurantSystemModel.FK__Goods__IdUnit__2F10007B">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Goods" EntitySet="Goods" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GoodsForF__IdGoo__34C8D9D1" Association="RestaurantSystemModel.FK__GoodsForF__IdGoo__34C8D9D1">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="GoodsForFood" EntitySet="GoodsForFood" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InputInfo__IdGoo__403A8C7D" Association="RestaurantSystemModel.FK__InputInfo__IdGoo__403A8C7D">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="InputInfo" EntitySet="InputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutputInf__IdGoo__4AB81AF0" Association="RestaurantSystemModel.FK__OutputInf__IdGoo__4AB81AF0">
+      <End Role="Goods" EntitySet="Goods" />
+      <End Role="OutputInfo" EntitySet="OutputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Input__IdSupplie__398D8EEE" Association="RestaurantSystemModel.FK__Input__IdSupplie__398D8EEE">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Input" EntitySet="Input" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Input__IdSupplie__3A81B327" Association="RestaurantSystemModel.FK__Input__IdSupplie__3A81B327">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="Input" EntitySet="Input" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InputInfo__Input__3F466844" Association="RestaurantSystemModel.FK__InputInfo__Input__3F466844">
+      <End Role="Input" EntitySet="Input" />
+      <End Role="InputInfo" EntitySet="InputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Output__IdStaff__44FF419A" Association="RestaurantSystemModel.FK__Output__IdStaff__44FF419A">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Output" EntitySet="Output" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutputInf__Count__49C3F6B7" Association="RestaurantSystemModel.FK__OutputInf__Count__49C3F6B7">
+      <End Role="Output" EntitySet="Output" />
+      <End Role="OutputInfo" EntitySet="OutputInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TableFood__IdReg__0DAF0CB0" Association="RestaurantSystemModel.FK__TableFood__IdReg__0DAF0CB0">
+      <End Role="Region" EntitySet="Region" />
+      <End Role="TableFood" EntitySet="TableFood" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__IdRole__0519C6AF" Association="RestaurantSystemModel.FK__Staff__IdRole__0519C6AF">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Bill">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TimeIn" Type="DateTime" Precision="3" />
+    <Property Name="TimeOut" Type="DateTime" Precision="3" />
+    <Property Name="TotalPrice" Type="Double" />
+    <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Discount" Type="Int32" />
+    <Property Name="IdTable" Type="Int32" />
+    <Property Name="IdStaff" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TableFood" Relationship="RestaurantSystemModel.FK__Bill__IdStaff__1FCDBCEB" FromRole="Bill" ToRole="TableFood" />
+    <NavigationProperty Name="Staff" Relationship="RestaurantSystemModel.FK__Bill__IdStaff__20C1E124" FromRole="Bill" ToRole="Staff" />
+    <NavigationProperty Name="BillInfo" Relationship="RestaurantSystemModel.FK__BillInfo__Count__25869641" FromRole="Bill" ToRole="BillInfo" />
+  </EntityType>
+  <EntityType Name="BillInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBill" Type="Int32" />
+    <Property Name="IdFood" Type="Int32" />
+    <Property Name="Count" Type="Int32" />
+    <NavigationProperty Name="Bill" Relationship="RestaurantSystemModel.FK__BillInfo__Count__25869641" FromRole="BillInfo" ToRole="Bill" />
+    <NavigationProperty Name="Food" Relationship="RestaurantSystemModel.FK__BillInfo__IdFood__267ABA7A" FromRole="BillInfo" ToRole="Food" />
+  </EntityType>
+  <EntityType Name="CategoryFood">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Food" Relationship="RestaurantSystemModel.FK__Food__IdUnit__1A14E395" FromRole="CategoryFood" ToRole="Food" />
+  </EntityType>
+  <EntityType Name="Food">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="IdCategoryFood" Type="Int32" />
+    <Property Name="IdUnit" Type="Int32" />
+    <NavigationProperty Name="BillInfo" Relationship="RestaurantSystemModel.FK__BillInfo__IdFood__267ABA7A" FromRole="Food" ToRole="BillInfo" />
+    <NavigationProperty Name="CategoryFood" Relationship="RestaurantSystemModel.FK__Food__IdUnit__1A14E395" FromRole="Food" ToRole="CategoryFood" />
+    <NavigationProperty Name="Unit" Relationship="RestaurantSystemModel.FK__Food__IdUnit__1B0907CE" FromRole="Food" ToRole="Unit" />
+    <NavigationProperty Name="GoodsForFood" Relationship="RestaurantSystemModel.FK__GoodsForF__Count__33D4B598" FromRole="Food" ToRole="GoodsForFood" />
+  </EntityType>
+  <EntityType Name="Goods">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="IdUnit" Type="Int32" />
+    <NavigationProperty Name="Unit" Relationship="RestaurantSystemModel.FK__Goods__IdUnit__2F10007B" FromRole="Goods" ToRole="Unit" />
+    <NavigationProperty Name="GoodsForFood" Relationship="RestaurantSystemModel.FK__GoodsForF__IdGoo__34C8D9D1" FromRole="Goods" ToRole="GoodsForFood" />
+    <NavigationProperty Name="InputInfo" Relationship="RestaurantSystemModel.FK__InputInfo__IdGoo__403A8C7D" FromRole="Goods" ToRole="InputInfo" />
+    <NavigationProperty Name="OutputInfo" Relationship="RestaurantSystemModel.FK__OutputInf__IdGoo__4AB81AF0" FromRole="Goods" ToRole="OutputInfo" />
+  </EntityType>
+  <EntityType Name="GoodsForFood">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdFood" Type="Int32" />
+    <Property Name="IdGoods" Type="Int32" />
+    <Property Name="Count" Type="Double" />
+    <NavigationProperty Name="Food" Relationship="RestaurantSystemModel.FK__GoodsForF__Count__33D4B598" FromRole="GoodsForFood" ToRole="Food" />
+    <NavigationProperty Name="Goods" Relationship="RestaurantSystemModel.FK__GoodsForF__IdGoo__34C8D9D1" FromRole="GoodsForFood" ToRole="Goods" />
+  </EntityType>
+  <EntityType Name="Input">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DateInput" Type="DateTime" Precision="3" />
+    <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IdStaff" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IdSupplier" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Staff" Relationship="RestaurantSystemModel.FK__Input__IdSupplie__398D8EEE" FromRole="Input" ToRole="Staff" />
+    <NavigationProperty Name="Supplier" Relationship="RestaurantSystemModel.FK__Input__IdSupplie__3A81B327" FromRole="Input" ToRole="Supplier" />
+    <NavigationProperty Name="InputInfo" Relationship="RestaurantSystemModel.FK__InputInfo__Input__3F466844" FromRole="Input" ToRole="InputInfo" />
+  </EntityType>
+  <EntityType Name="InputInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdInput" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IdGoods" Type="Int32" />
+    <Property Name="Count" Type="Double" />
+    <Property Name="InputPrice" Type="Double" />
+    <NavigationProperty Name="Goods" Relationship="RestaurantSystemModel.FK__InputInfo__IdGoo__403A8C7D" FromRole="InputInfo" ToRole="Goods" />
+    <NavigationProperty Name="Input" Relationship="RestaurantSystemModel.FK__InputInfo__Input__3F466844" FromRole="InputInfo" ToRole="Input" />
+  </EntityType>
+  <EntityType Name="Output">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DateOutput" Type="DateTime" Precision="3" />
+    <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IdStaff" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Staff" Relationship="RestaurantSystemModel.FK__Output__IdStaff__44FF419A" FromRole="Output" ToRole="Staff" />
+    <NavigationProperty Name="OutputInfo" Relationship="RestaurantSystemModel.FK__OutputInf__Count__49C3F6B7" FromRole="Output" ToRole="OutputInfo" />
+  </EntityType>
+  <EntityType Name="OutputInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdOutput" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IdGoods" Type="Int32" />
+    <Property Name="Count" Type="Double" />
+    <NavigationProperty Name="Goods" Relationship="RestaurantSystemModel.FK__OutputInf__IdGoo__4AB81AF0" FromRole="OutputInfo" ToRole="Goods" />
+    <NavigationProperty Name="Output" Relationship="RestaurantSystemModel.FK__OutputInf__Count__49C3F6B7" FromRole="OutputInfo" ToRole="Output" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TableFood" Relationship="RestaurantSystemModel.FK__TableFood__IdReg__0DAF0CB0" FromRole="Region" ToRole="TableFood" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Staff" Relationship="RestaurantSystemModel.FK__Staff__IdRole__0519C6AF" FromRole="Role" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IdRole" Type="Int32" />
+    <NavigationProperty Name="Bill" Relationship="RestaurantSystemModel.FK__Bill__IdStaff__20C1E124" FromRole="Staff" ToRole="Bill" />
+    <NavigationProperty Name="Input" Relationship="RestaurantSystemModel.FK__Input__IdSupplie__398D8EEE" FromRole="Staff" ToRole="Input" />
+    <NavigationProperty Name="Output" Relationship="RestaurantSystemModel.FK__Output__IdStaff__44FF419A" FromRole="Staff" ToRole="Output" />
+    <NavigationProperty Name="Role" Relationship="RestaurantSystemModel.FK__Staff__IdRole__0519C6AF" FromRole="Staff" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContractDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Input" Relationship="RestaurantSystemModel.FK__Input__IdSupplie__3A81B327" FromRole="Supplier" ToRole="Input" />
+  </EntityType>
+  <EntityType Name="TableFood">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IdRegion" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bill" Relationship="RestaurantSystemModel.FK__Bill__IdStaff__1FCDBCEB" FromRole="TableFood" ToRole="Bill" />
+    <NavigationProperty Name="Region" Relationship="RestaurantSystemModel.FK__TableFood__IdReg__0DAF0CB0" FromRole="TableFood" ToRole="Region" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Food" Relationship="RestaurantSystemModel.FK__Food__IdUnit__1B0907CE" FromRole="Unit" ToRole="Food" />
+    <NavigationProperty Name="Goods" Relationship="RestaurantSystemModel.FK__Goods__IdUnit__2F10007B" FromRole="Unit" ToRole="Goods" />
+  </EntityType>
+  <Association Name="FK__Bill__IdStaff__1FCDBCEB">
+    <End Type="RestaurantSystemModel.TableFood" Role="TableFood" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.Bill" Role="Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TableFood">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="IdTable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Bill__IdStaff__20C1E124">
+    <End Type="RestaurantSystemModel.Staff" Role="Staff" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.Bill" Role="Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BillInfo__Count__25869641">
+    <End Type="RestaurantSystemModel.Bill" Role="Bill" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.BillInfo" Role="BillInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bill">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillInfo">
+        <PropertyRef Name="IdBill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BillInfo__IdFood__267ABA7A">
+    <End Type="RestaurantSystemModel.Food" Role="Food" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.BillInfo" Role="BillInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Food">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillInfo">
+        <PropertyRef Name="IdFood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Food__IdUnit__1A14E395">
+    <End Type="RestaurantSystemModel.CategoryFood" Role="CategoryFood" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.Food" Role="Food" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryFood">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Food">
+        <PropertyRef Name="IdCategoryFood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Food__IdUnit__1B0907CE">
+    <End Type="RestaurantSystemModel.Unit" Role="Unit" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.Food" Role="Food" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Food">
+        <PropertyRef Name="IdUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GoodsForF__Count__33D4B598">
+    <End Type="RestaurantSystemModel.Food" Role="Food" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.GoodsForFood" Role="GoodsForFood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Food">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GoodsForFood">
+        <PropertyRef Name="IdFood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Goods__IdUnit__2F10007B">
+    <End Type="RestaurantSystemModel.Unit" Role="Unit" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.Goods" Role="Goods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Goods">
+        <PropertyRef Name="IdUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GoodsForF__IdGoo__34C8D9D1">
+    <End Type="RestaurantSystemModel.Goods" Role="Goods" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.GoodsForFood" Role="GoodsForFood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GoodsForFood">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InputInfo__IdGoo__403A8C7D">
+    <End Type="RestaurantSystemModel.Goods" Role="Goods" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.InputInfo" Role="InputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InputInfo">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutputInf__IdGoo__4AB81AF0">
+    <End Type="RestaurantSystemModel.Goods" Role="Goods" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.OutputInfo" Role="OutputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goods">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OutputInfo">
+        <PropertyRef Name="IdGoods" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Input__IdSupplie__398D8EEE">
+    <End Type="RestaurantSystemModel.Staff" Role="Staff" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.Input" Role="Input" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Input">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Input__IdSupplie__3A81B327">
+    <End Type="RestaurantSystemModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.Input" Role="Input" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Input">
+        <PropertyRef Name="IdSupplier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InputInfo__Input__3F466844">
+    <End Type="RestaurantSystemModel.Input" Role="Input" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.InputInfo" Role="InputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Input">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InputInfo">
+        <PropertyRef Name="IdInput" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Output__IdStaff__44FF419A">
+    <End Type="RestaurantSystemModel.Staff" Role="Staff" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.Output" Role="Output" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Output">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutputInf__Count__49C3F6B7">
+    <End Type="RestaurantSystemModel.Output" Role="Output" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.OutputInfo" Role="OutputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Output">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OutputInfo">
+        <PropertyRef Name="IdOutput" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TableFood__IdReg__0DAF0CB0">
+    <End Type="RestaurantSystemModel.Region" Role="Region" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.TableFood" Role="TableFood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TableFood">
+        <PropertyRef Name="IdRegion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__IdRole__0519C6AF">
+    <End Type="RestaurantSystemModel.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="RestaurantSystemModel.Staff" Role="Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
