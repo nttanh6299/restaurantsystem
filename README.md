@@ -2,8 +2,7 @@
 
 1 dự án nhỏ sử dụng WPF với IDE vs 2017
 
-Đang nghỉ hè năm nhất thì mình bắt đầu học c#, và đây là dự án được làm trong khi mình đang học c# cơ bản, vừa học vừa làm project này, thiếu gì học nấy (đây cũng là 1 cách học), với project này chủ yếu mình làm là vì kiến thức thôi
-<strong>haha</strong>
+Đang nghỉ hè năm nhất thì mình bắt đầu học c#, và đây là dự án được làm trong khi mình đang học c# cơ bản, vừa học vừa làm project này, thiếu gì học nấy (đây cũng là 1 cách học), với project này chủ yếu mình làm là vì <strong>kiến thức</strong> thôi haha
 
 Về cơ sở dữ liệu thì mình có nhét chung vào folder project này, kiến thức về SQL là  con số 0 nên thiết kế khá chuối :v
 
